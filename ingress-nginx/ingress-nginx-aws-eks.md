@@ -30,7 +30,7 @@ https://github.com/kubernetes/ingress-nginx/blob/bc4902ec70/docs/deploy/index.md
 
 #### Modification
 
-##### 1. single-certification
+##### 1. single-certificate
 
 As the doc said, i replacing the certification as my domain while using HTTPS
 
