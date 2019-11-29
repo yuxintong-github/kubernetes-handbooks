@@ -35,7 +35,7 @@ https://github.com/kubernetes/ingress-nginx/blob/bc4902ec70/docs/deploy/index.md
 As the doc said, i replacing the certification as my domain while using HTTPS
 
 `
-alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:xxxxx:certificate/xxxxxxx
+service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-west-2:xxxxx:certificate/xxxxxxx
 `
 
 ##### 2. Multi-certificates
