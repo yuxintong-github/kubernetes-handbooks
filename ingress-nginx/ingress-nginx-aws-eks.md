@@ -30,11 +30,23 @@ https://github.com/kubernetes/ingress-nginx/blob/bc4902ec70/docs/deploy/index.md
 
 #### Modification
 
-##### 1. certification
+##### 1. single-certification
 
 As the doc said, i replacing the certification as my domain while using HTTPS
 
-##### 2. service.beta.kubernetes.io/aws-load-balancer-backend-protocol
+`
+alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:xxxxx:certificate/xxxxxxx
+`
+
+##### 2. Multi-certificates
+
+`
+alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:xxxxx:certificate/cert1,arn:aws:acm:us-west-2:xxxxx:certificate/cert2,arn:aws:acm:us-west-2:xxxxx:certificate/cert3
+`
+
+
+
+##### 3. service.beta.kubernetes.io/aws-load-balancer-backend-protocol
 
 because of we use websocket as one backend, so rewrite *http* To *tcp*
 
