@@ -46,7 +46,7 @@ should create a new ingress-svc to support multi-certs.
 kind: Service
 apiVersion: v1
 metadata:
-  name: ingress-nginx-foc-fwmrm-net
+  name: ingress-nginx-new-domain-name
   namespace: ingress-nginx
   labels:
     app.kubernetes.io/name: ingress-nginx
