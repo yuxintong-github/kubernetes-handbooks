@@ -40,10 +40,41 @@ alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:xxxxx:certifica
 
 ##### 2. Multi-certificates
 
-`
-alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:xxxxx:certificate/cert1,arn:aws:acm:us-west-2:xxxxx:certificate/cert2,arn:aws:acm:us-west-2:xxxxx:certificate/cert3
-`
+should create a new ingress-svc to support multi-certs.
 
+```
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-nginx-foc-fwmrm-net
+  namespace: ingress-nginx
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+  annotations:
+    # replace with the correct value of the generated certificate in the AWS console
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-west-2:XXXXXXXX:certificate/XXXXXX-XXXXXXX-XXXXXXX-XXXXXXXX"
+    # the backend instances are HTTP
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
+    # Map port 443
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+    # Ensure the ELB idle timeout is less than nginx keep-alive timeout. By default,
+    # NGINX keep-alive is set to 75s. If using WebSockets, the value will need to be
+    # increased to '3600' to avoid any potential issues.
+    service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "60"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-connection-draining-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+  ports:
+    - name: https
+      port: 443
+      targetPort: http
+```
 
 
 ##### 3. service.beta.kubernetes.io/aws-load-balancer-backend-protocol
