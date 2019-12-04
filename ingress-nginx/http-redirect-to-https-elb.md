@@ -17,9 +17,14 @@ CLIENT HTTPS -> ELB(HTTPS) -> NGINX-SVC 443 -> NGINX-POD 80 -> Redirect to HTTPS
 
 ### Solution
 
+- https:
+
 CLINET HTTPS -> ELB(HTTPS) -> NGINX-SVC 443 -> NGINX-POD 80 -> CLIENT
 
-CLIENT HTTP -> ELB -> NGINX-SVC 80 -> NGINX-POD 8080 -> 308 TO HTTPS -> ELB (HTTPS) -> NGINX-SVC 443 -> NGINX-POD 80 -> CLIENT
+- http:
+
+CLIENT HTTP -> ELB -> NGINX-SVC 80 -> NGINX-POD 8080 -> 308 TO HTTPS -> ELB (HTTPS) -> 
+     NGINX-SVC 443 -> NGINX-POD 80 -> CLIENT
 
 #### Ingress-svc
 
@@ -131,11 +136,19 @@ ports:
     containerPort: 8080
 ```
 
+<br></br>
+
 Related doc:
+
 https://github.com/kubernetes/ingress-nginx/issues/2724
+
 https://github.com/kubernetes/ingress-nginx/issues/1957
+
 https://stackoverflow.com/questions/51882079/kubernetes-http-to-https-redirect-on-aws-with-elb-terminating-ssl
+
 https://stackoverflow.com/questions/33620183/nginx-broken-header-with-proxy-protocol-and-elb
+
 https://stackoverflow.com/questions/49856754/nginx-ingress-too-many-redirects-when-force-ssl-is-enabled
+
 https://stackoverflow.com/questions/57979939/how-to-redirect-http-to-https-using-a-kubernetes-ingress-controller-on-amazon-ek
 
