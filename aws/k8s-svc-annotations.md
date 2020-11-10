@@ -22,3 +22,12 @@
 - `service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy`
 - `service.beta.kubernetes.io/aws-load-balancer-ssl-ports` (default '*')
 - `service.beta.kubernetes.io/aws-load-balancer-type: nlb`
+
+// ServiceAnnotationLoadBalancerExtraSecurityGroups is the annotation used
+// on the service to specify additional security groups to be added to ELB created
+- const ServiceAnnotationLoadBalancerExtraSecurityGroups = "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups"
+
+// ServiceAnnotationLoadBalancerSecurityGroups is the annotation used
+// on the service to specify the security groups to be added to ELB created. Differently from the annotation
+// "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups", this replaces all other security groups previously assigned to the ELB.
+- const ServiceAnnotationLoadBalancerSecurityGroups = "service.beta.kubernetes.io/aws-load-balancer-security-groups"
